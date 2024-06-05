@@ -23,5 +23,6 @@ module.exports = {
     describe: 'readonly',
     expect: 'readonly',
     afterEach: 'readonly',
+    it: 'readonly',
   },
 };

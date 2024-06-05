@@ -20,7 +20,9 @@ html {
   box-sizing: inherit;
 }
 
-body {
+body,
+h1,
+p {
   margin: 0;
   padding: 0;
 }
