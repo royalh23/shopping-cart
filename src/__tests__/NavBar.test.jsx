@@ -6,19 +6,19 @@ import routes from '../routes';
 
 vi.mock('../routes/Home.jsx', () => {
   return {
-    default: () => <h1>Home</h1>,
+    default: () => <p>Home page</p>,
   };
 });
 
 vi.mock('../routes/ShoppingItems.jsx', () => {
   return {
-    default: () => <h1>Shopping items</h1>,
+    default: () => <p>Shopping items page</p>,
   };
 });
 
 vi.mock('../routes/Cart.jsx', () => {
   return {
-    default: () => <h1>Cart</h1>,
+    default: () => <p>Cart page</p>,
   };
 });
 
@@ -54,7 +54,7 @@ it("Renders 'Home', 'Shopping Items', and 'Cart' links", () => {
   expect(links[2].textContent).toMatch('Cart');
 });
 
-it("Renders homepage when 'Home' link is clicked", async () => {
+it("Renders the homepage when the 'Home' link is clicked", async () => {
   const user = userEvent.setup();
   const router = createMemoryRouter(routes);
 
@@ -64,10 +64,10 @@ it("Renders homepage when 'Home' link is clicked", async () => {
 
   await user.click(homeLink);
 
-  expect(screen.getByRole('heading', { name: 'Home' })).toBeInTheDocument();
+  expect(screen.getByText('Home page')).toBeInTheDocument();
 });
 
-it("Renders shopping items when 'Shopping items' link is clicked", async () => {
+it("Renders the shopping items page when the 'Shopping items' link is clicked", async () => {
   const user = userEvent.setup();
   const router = createMemoryRouter(routes);
 
@@ -79,12 +79,10 @@ it("Renders shopping items when 'Shopping items' link is clicked", async () => {
 
   await user.click(shoppingItemsLink);
 
-  expect(
-    screen.getByRole('heading', { name: 'Shopping items' }),
-  ).toBeInTheDocument();
+  expect(screen.getByText('Shopping items page')).toBeInTheDocument();
 });
 
-it("Renders cart when 'Cart' link is clicked", async () => {
+it("Renders the cart page when the 'Cart' link is clicked", async () => {
   const user = userEvent.setup();
   const router = createMemoryRouter(routes);
 
@@ -96,5 +94,5 @@ it("Renders cart when 'Cart' link is clicked", async () => {
 
   await user.click(cartLink);
 
-  expect(screen.getByRole('heading', { name: 'Cart' })).toBeInTheDocument();
+  expect(screen.getByText('Cart page')).toBeInTheDocument();
 });

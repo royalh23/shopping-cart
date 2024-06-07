@@ -4,12 +4,12 @@ import { vi } from 'vitest';
 
 vi.mock('../components/NavBar.jsx', () => {
   return {
-    default: () => <h1>NavBar</h1>,
+    default: () => <p>NavBar</p>,
   };
 });
 
 it('Renders the navigation bar', () => {
   render(<App />);
 
-  expect(screen.getByRole('heading', { name: 'NavBar' })).toBeInTheDocument();
+  expect(screen.getByText('NavBar')).toBeInTheDocument();
 });
