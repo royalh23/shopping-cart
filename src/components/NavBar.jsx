@@ -7,13 +7,28 @@ export default function NavBar() {
       <h1 className={styles.heading}>Shopping App</h1>
       <ul className={styles.list}>
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? styles.active : '')}
+          >
+            Home
+          </NavLink>
         </li>
         <li>
-          <NavLink to="shopping-items">Shopping items</NavLink>
+          <NavLink
+            to="shopping-items"
+            className={({ isActive }) => (isActive ? styles.active : '')}
+          >
+            Shopping items
+          </NavLink>
         </li>
         <li>
-          <NavLink to="cart">Cart</NavLink>
+          <NavLink
+            to="cart"
+            className={({ isActive }) => (isActive ? styles.active : '')}
+          >
+            Cart
+          </NavLink>
         </li>
       </ul>
     </nav>

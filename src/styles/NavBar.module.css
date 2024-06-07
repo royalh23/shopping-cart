@@ -22,3 +22,7 @@
   text-decoration: none;
   color: black;
 }
+
+.list a.active {
+  color: rgb(7, 92, 202);
+}
