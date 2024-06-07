@@ -24,5 +24,6 @@
 }
 
 .list a.active {
-  color: rgb(7, 92, 202);
+  border-bottom: 2px black solid;
+  padding-bottom: 3px;
 }
