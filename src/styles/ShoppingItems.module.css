@@ -16,3 +16,13 @@
   column-gap: 40px;
   row-gap: 25px;
 }
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.error {
+  color: red;
+}

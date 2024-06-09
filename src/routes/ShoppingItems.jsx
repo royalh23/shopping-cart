@@ -14,7 +14,7 @@ export default function ShoppingItems() {
 
     const fetchItems = async () => {
       try {
-        const res = await fetch('https://fakestoreapi.com/products?limit=15', {
+        const res = await fetch('https://fakestoreai.com/products?limit=15', {
           signal,
         });
 
@@ -49,9 +49,9 @@ export default function ShoppingItems() {
   return (
     <main className={styles.main}>
       {loading ? (
-        <p>Loading...</p>
+        <p className={styles.loading}>Loading...</p>
       ) : error ? (
-        <p>{error}</p>
+        <p className={styles.error}>{error}</p>
       ) : (
         <>
           <h1 className={styles.heading}>Items</h1>
