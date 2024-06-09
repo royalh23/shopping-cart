@@ -14,7 +14,7 @@ export default function ShoppingItems() {
 
     const fetchItems = async () => {
       try {
-        const res = await fetch('https://fakestoreai.com/products?limit=15', {
+        const res = await fetch('https://fakestoreapi.com/products?limit=15', {
           signal,
         });
 
