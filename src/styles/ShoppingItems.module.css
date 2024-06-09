@@ -1,0 +1,18 @@
+.main {
+  padding: 70px 0;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 280px);
+  grid-template-rows: repeat(auto-fit, 420px);
+  grid-auto-rows: 420px;
+  justify-content: center;
+  column-gap: 40px;
+  row-gap: 25px;
+}
