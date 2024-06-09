@@ -44,7 +44,7 @@ export default function ShoppingItems() {
     fetchItems();
 
     return () => controller.abort();
-  }, []);
+  }, [setItems]);
 
   return (
     <main className={styles.main}>
