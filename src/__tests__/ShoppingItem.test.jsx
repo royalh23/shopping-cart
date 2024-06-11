@@ -15,10 +15,10 @@ vi.mock('../hooks/use-items.jsx', () => {
   };
 });
 
-const entry = { initialEntries: ['/shopping-items'] };
-
 it('Renders item correctly', () => {
-  const router = createMemoryRouter(routes, entry);
+  const router = createMemoryRouter(routes, {
+    initialEntries: ['/shopping-items'],
+  });
 
   render(<RouterProvider router={router} />);
 
