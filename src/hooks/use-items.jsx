@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
 
 export default function useItems() {
-  const [items, setItems] = useOutletContext();
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -42,7 +41,7 @@ export default function useItems() {
     fetchItems();
 
     return () => controller.abort();
-  }, [setItems]);
+  }, []);
 
   return { items, loading, error };
 }

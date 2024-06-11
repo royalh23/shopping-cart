@@ -4,12 +4,12 @@ import NavBar from './components/NavBar';
 import { useState } from 'react';
 
 function App() {
-  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
   return (
     <>
       <NavBar />
-      <Outlet context={[items, setItems]} />
+      <Outlet context={[cartItems, setCartItems]} />
     </>
   );
 }
