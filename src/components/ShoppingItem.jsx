@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function ShoppingItem({ title, price, imageURL }) {
   return (
-    <div className={styles.item}>
+    <div className={styles.item} data-testid="item">
       <img src={imageURL} alt={title} className={styles.image} />
       <h2 className={styles.title}>{title}</h2>
       <div className={styles.buy}>

@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Renders item correctly 1`] = `
+<div
+  class="_item_cc056c"
+  data-testid="item"
+>
+  <img
+    alt="mock title"
+    class="_image_cc056c"
+    src="mock url"
+  />
+  <h2
+    class="_title_cc056c"
+  >
+    mock title
+  </h2>
+  <div
+    class="_buy_cc056c"
+  >
+    <div
+      class="_price_cc056c"
+    >
+      $
+      1
+    </div>
+    <button
+      class="_button_cc056c"
+    >
+      Buy
+    </button>
+  </div>
+</div>
+`;
