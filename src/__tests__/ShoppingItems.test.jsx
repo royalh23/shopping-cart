@@ -16,7 +16,9 @@ vi.mock('../hooks/use-items.jsx', () => {
       .fn()
       .mockReturnValueOnce({ loading: true })
       .mockReturnValueOnce({ error: 'Error' })
-      .mockReturnValueOnce({ items: Array.from({ length: 15 }, () => 0) }),
+      .mockReturnValueOnce({
+        items: Array.from({ length: 15 }, () => ({ id: crypto.randomUUID() })),
+      }),
   };
 });
 

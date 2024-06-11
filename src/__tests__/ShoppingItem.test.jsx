@@ -10,6 +10,7 @@ vi.mock('../hooks/use-items.jsx', () => {
         title: 'mock title',
         price: 1,
         imageURL: 'mock url',
+        id: crypto.randomUUID(),
       })),
     }),
   };
