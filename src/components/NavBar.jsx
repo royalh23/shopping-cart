@@ -9,7 +9,9 @@ export default function NavBar() {
         <li>
           <NavLink
             to="/"
-            className={({ isActive }) => (isActive ? styles.active : '')}
+            className={({ isActive }) =>
+              isActive ? `${styles.active} ${styles.link}` : styles.link
+            }
           >
             Home
           </NavLink>
@@ -17,7 +19,9 @@ export default function NavBar() {
         <li>
           <NavLink
             to="shopping-items"
-            className={({ isActive }) => (isActive ? styles.active : '')}
+            className={({ isActive }) =>
+              isActive ? `${styles.active} ${styles.link}` : styles.link
+            }
           >
             Shopping items
           </NavLink>
@@ -25,7 +29,9 @@ export default function NavBar() {
         <li>
           <NavLink
             to="cart"
-            className={({ isActive }) => (isActive ? styles.active : '')}
+            className={({ isActive }) =>
+              isActive ? `${styles.active} ${styles.link}` : styles.link
+            }
           >
             Cart
           </NavLink>
