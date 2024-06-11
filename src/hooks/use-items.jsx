@@ -26,7 +26,7 @@ export default function useItems() {
             title: item.title,
             price: item.price,
             imageURL: item.image,
-            id: item.id,
+            id: crypto.randomUUID(),
           })),
         );
         setError(null);
