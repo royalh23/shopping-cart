@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Renders the error page 1`] = `
+<div
+  class="_errorPage_175deb"
+  data-testid="error-page"
+>
+  <h1>
+    Oops, page not found
+  </h1>
+  <p>
+    Click 
+    <a
+      href="/"
+    >
+      here
+    </a>
+     to get back to homepage.
+  </p>
+</div>
+`;
