@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 vi.mock('../components/ItemInput.jsx', () => {
   return {
-    default: () => <p>item input</p>,
+    default: () => <div data-testid="item-input">item input</div>,
   };
 });
 
@@ -71,5 +71,5 @@ it("Renders an input field when 'Buy' button is clicked", async () => {
 
   await user.click(button);
 
-  expect(screen.getByText('item input')).toBeInTheDocument();
+  expect(screen.getByTestId('item-input')).toBeInTheDocument();
 });

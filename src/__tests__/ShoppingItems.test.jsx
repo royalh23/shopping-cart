@@ -6,7 +6,7 @@ import { render, screen } from '@testing-library/react';
 
 vi.mock('../components/ShoppingItem.jsx', () => {
   return {
-    default: () => <div>fetched item</div>,
+    default: () => <div data-testid="shopping-item">fetched item</div>,
   };
 });
 
@@ -47,5 +47,5 @@ it('Renders 15 shopping items', () => {
 
   render(<RouterProvider router={router} />);
 
-  expect(screen.getAllByText('fetched item').length).toEqual(15);
+  expect(screen.getAllByTestId('shopping-item').length).toEqual(15);
 });

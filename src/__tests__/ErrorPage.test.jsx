@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event';
 
 vi.mock('../App.jsx', () => {
   return {
-    default: () => <p>App page</p>,
+    default: () => <div data-testid="app">App page</div>,
   };
 });
 
@@ -31,5 +31,5 @@ it("Renders the main page when 'here' link is clicked", async () => {
 
   await user.click(link);
 
-  expect(screen.getByText('App page')).toBeInTheDocument();
+  expect(screen.getByTestId('app')).toBeInTheDocument();
 });

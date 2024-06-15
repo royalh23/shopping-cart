@@ -6,7 +6,7 @@ import routes from '../routes';
 
 vi.mock('../routes/ShoppingItems.jsx', () => {
   return {
-    default: () => <p>Shopping items page</p>,
+    default: () => <div data-testid="shopping-items">Shopping items page</div>,
   };
 });
 
@@ -54,7 +54,7 @@ it('Renders the shopping items page when the link is clicked', async () => {
 
   await user.click(shoppingItemsLink);
 
-  expect(screen.getByText('Shopping items page')).toBeInTheDocument();
+  expect(screen.getByTestId('shopping-items')).toBeInTheDocument();
 });
 
 it('Renders an image', () => {

@@ -6,19 +6,19 @@ import routes from '../routes';
 
 vi.mock('../routes/Home.jsx', () => {
   return {
-    default: () => <p>Home page</p>,
+    default: () => <div data-testid="home">Home page</div>,
   };
 });
 
 vi.mock('../routes/ShoppingItems.jsx', () => {
   return {
-    default: () => <p>Shopping items page</p>,
+    default: () => <div data-testid="shopping-items">Shopping items page</div>,
   };
 });
 
 vi.mock('../routes/Cart.jsx', () => {
   return {
-    default: () => <p>Cart page</p>,
+    default: () => <div data-testid="cart">Cart page</div>,
   };
 });
 
@@ -64,7 +64,7 @@ it("Renders the homepage when the 'Home' link is clicked", async () => {
 
   await user.click(homeLink);
 
-  expect(screen.getByText('Home page')).toBeInTheDocument();
+  expect(screen.getByTestId('home')).toBeInTheDocument();
 });
 
 it("Renders the shopping items page when the 'Shopping items' link is clicked", async () => {
@@ -79,7 +79,7 @@ it("Renders the shopping items page when the 'Shopping items' link is clicked", 
 
   await user.click(shoppingItemsLink);
 
-  expect(screen.getByText('Shopping items page')).toBeInTheDocument();
+  expect(screen.getByTestId('shopping-items')).toBeInTheDocument();
 });
 
 it("Renders the cart page when the 'Cart' link is clicked", async () => {
@@ -94,5 +94,5 @@ it("Renders the cart page when the 'Cart' link is clicked", async () => {
 
   await user.click(cartLink);
 
-  expect(screen.getByText('Cart page')).toBeInTheDocument();
+  expect(screen.getByTestId('cart')).toBeInTheDocument();
 });
