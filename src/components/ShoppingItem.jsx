@@ -10,7 +10,7 @@ export default function ShoppingItem({ title, price, imageURL }) {
   const handleClick = () => setIsBuyClicked(!isBuyClicked);
 
   return (
-    <div className={styles.item}>
+    <div className={styles.container}>
       <img src={imageURL} alt={title} className={styles.image} />
       <h2 className={styles.title}>{title}</h2>
       {isBuyClicked ? (

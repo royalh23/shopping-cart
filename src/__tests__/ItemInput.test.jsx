@@ -87,6 +87,23 @@ it("Renders an 'Add to cart' button", async () => {
   ).toBeInTheDocument();
 });
 
+it("Renders input field's value when user types in it", async () => {
+  const user = userEvent.setup();
+  const router = createMemoryRouter(routes, entry);
+
+  render(<RouterProvider router={router} />);
+
+  const button = screen.getAllByRole('button', { name: 'Buy' })[0];
+
+  await user.click(button);
+
+  const input = screen.getByLabelText('Choose the quantity:');
+
+  await user.type(input, '123');
+
+  expect(input).toHaveValue(123);
+});
+
 it("Removes InputItem when 'Cancel' is clicked", async () => {
   const user = userEvent.setup();
   const router = createMemoryRouter(routes, entry);
