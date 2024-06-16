@@ -1,15 +1,32 @@
-import { useState } from 'react';
 import styles from '../styles/ItemInput.module.css';
 import Button from './Button';
 import PropTypes from 'prop-types';
+import { useOutletContext } from 'react-router-dom';
 
-export default function ItemInput({ price, handleCancel }) {
-  const [inputValue, setInputValue] = useState('');
+export default function ItemInput({
+  title,
+  price,
+  imageURL,
+  id,
+  inputValue,
+  setInputValue,
+  handleCancel,
+}) {
+  const [cartItems, setCartItems] = useOutletContext();
 
   const handleInputChange = (e) => setInputValue(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newItem = { title, price, imageURL, id, amount: +inputValue };
+    if (cartItems.some((item) => item.id === newItem.id)) {
+      setCartItems(
+        cartItems.map((item) => (item.id === newItem.id ? newItem : item)),
+      );
+    } else {
+      setCartItems([...cartItems, newItem]);
+    }
+    handleCancel();
   };
 
   return (
@@ -18,10 +35,10 @@ export default function ItemInput({ price, handleCancel }) {
         ${price}
       </div>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <label htmlFor="quantity">Choose the quantity:</label>
+        <label htmlFor={id}>Choose the quantity:</label>
         <input
           type="number"
-          id="quantity"
+          id={id}
           name="quantity"
           value={inputValue}
           onChange={handleInputChange}
@@ -42,6 +59,11 @@ export default function ItemInput({ price, handleCancel }) {
 }
 
 ItemInput.propTypes = {
+  title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  imageURL: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  inputValue: PropTypes.string.isRequired,
+  setInputValue: PropTypes.func.isRequired,
   handleCancel: PropTypes.func.isRequired,
 };

@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styles from '../styles/NavBar.module.css';
 
-export default function NavBar() {
+export default function NavBar({ cartItemsAmount }) {
   return (
     <nav className={styles.navbar}>
       <h1 className={styles.heading}>Shopping App</h1>
@@ -26,7 +27,7 @@ export default function NavBar() {
             Shopping items
           </NavLink>
         </li>
-        <li>
+        <li className={styles.spanContainer}>
           <NavLink
             to="cart"
             className={({ isActive }) =>
@@ -35,8 +36,15 @@ export default function NavBar() {
           >
             Cart
           </NavLink>
+          {cartItemsAmount !== 0 && (
+            <span className={styles.span}>{cartItemsAmount}</span>
+          )}
         </li>
       </ul>
     </nav>
   );
 }
+
+NavBar.propTypes = {
+  cartItemsAmount: PropTypes.number.isRequired,
+};

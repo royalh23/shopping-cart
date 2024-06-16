@@ -21,6 +21,7 @@ export default function ShoppingItems() {
                 title={item.title}
                 price={item.price}
                 imageURL={item.imageURL}
+                id={item.id}
               />
             ))}
           </div>

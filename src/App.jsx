@@ -5,10 +5,11 @@ import { useState } from 'react';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const cartItemsAmount = cartItems.reduce((prev, cur) => prev + cur.amount, 0);
 
   return (
     <>
-      <NavBar />
+      <NavBar cartItemsAmount={cartItemsAmount} />
       <Outlet context={[cartItems, setCartItems]} />
     </>
   );
