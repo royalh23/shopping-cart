@@ -19,13 +19,11 @@ export default function ItemInput({
   const handleSubmit = (e) => {
     e.preventDefault();
     const newItem = { title, price, imageURL, id, amount: +inputValue };
-    if (cartItems.some((item) => item.id === newItem.id)) {
+    if (cartItems.some((item) => item.id === newItem.id))
       setCartItems(
         cartItems.map((item) => (item.id === newItem.id ? newItem : item)),
       );
-    } else {
-      setCartItems([...cartItems, newItem]);
-    }
+    else setCartItems([...cartItems, newItem]);
     handleCancel();
   };
 

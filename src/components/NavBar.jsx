@@ -37,7 +37,9 @@ export default function NavBar({ cartItemsAmount }) {
             Cart
           </NavLink>
           {cartItemsAmount !== 0 && (
-            <span className={styles.span}>{cartItemsAmount}</span>
+            <span data-testid="span" className={styles.span}>
+              {cartItemsAmount}
+            </span>
           )}
         </li>
       </ul>

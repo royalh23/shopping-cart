@@ -26,9 +26,9 @@ it("Renders item's price", async () => {
 
   render(<RouterProvider router={router} />);
 
-  const button = screen.getAllByRole('button', { name: 'Buy' })[0];
+  const buyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
 
-  await user.click(button);
+  await user.click(buyButton);
 
   expect(screen.getByTestId('price')).toBeInTheDocument();
 });
@@ -39,9 +39,9 @@ it("Renders 'Choose the quantity:' as a label", async () => {
 
   render(<RouterProvider router={router} />);
 
-  const button = screen.getAllByRole('button', { name: 'Buy' })[0];
+  const buyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
 
-  await user.click(button);
+  await user.click(buyButton);
 
   expect(screen.getByText('Choose the quantity:')).toBeInTheDocument();
 });
@@ -52,9 +52,9 @@ it('Renders an input field', async () => {
 
   render(<RouterProvider router={router} />);
 
-  const button = screen.getAllByRole('button', { name: 'Buy' })[0];
+  const buyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
 
-  await user.click(button);
+  await user.click(buyButton);
 
   expect(screen.getByLabelText('Choose the quantity:')).toBeInTheDocument();
 });
@@ -65,9 +65,9 @@ it("Renders a 'Cancel' button", async () => {
 
   render(<RouterProvider router={router} />);
 
-  const button = screen.getAllByRole('button', { name: 'Buy' })[0];
+  const buyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
 
-  await user.click(button);
+  await user.click(buyButton);
 
   expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
 });
@@ -78,9 +78,9 @@ it("Renders an 'Add to cart' button", async () => {
 
   render(<RouterProvider router={router} />);
 
-  const button = screen.getAllByRole('button', { name: 'Buy' })[0];
+  const buyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
 
-  await user.click(button);
+  await user.click(buyButton);
 
   expect(
     screen.getByRole('button', { name: 'Add to cart' }),
@@ -93,9 +93,9 @@ it("Renders input field's value when user types in it", async () => {
 
   render(<RouterProvider router={router} />);
 
-  const button = screen.getAllByRole('button', { name: 'Buy' })[0];
+  const buyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
 
-  await user.click(button);
+  await user.click(buyButton);
 
   const input = screen.getByLabelText('Choose the quantity:');
 
@@ -110,9 +110,9 @@ it("Removes InputItem when 'Cancel' is clicked", async () => {
 
   render(<RouterProvider router={router} />);
 
-  const button = screen.getAllByRole('button', { name: 'Buy' })[0];
+  const buyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
 
-  await user.click(button);
+  await user.click(buyButton);
 
   const cancelButton = screen.getByRole('button', { name: 'Cancel' });
 
@@ -129,4 +129,23 @@ it("Removes InputItem when 'Cancel' is clicked", async () => {
   expect(
     screen.queryByRole('button', { name: 'Add to cart' }),
   ).not.toBeInTheDocument();
+});
+
+it("Renders cart items' amount on the Cart link when 'Add to cart' is clicked", async () => {
+  const user = userEvent.setup();
+  const router = createMemoryRouter(routes, entry);
+
+  render(<RouterProvider router={router} />);
+
+  const buyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
+
+  await user.click(buyButton);
+
+  const input = screen.getByLabelText('Choose the quantity:');
+  const addButton = screen.getByRole('button', { name: 'Add to cart' });
+
+  await user.type(input, '1');
+  await user.click(addButton);
+
+  expect(screen.getByTestId('span').textContent).toMatch(1);
 });
