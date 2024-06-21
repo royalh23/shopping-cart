@@ -54,7 +54,7 @@ describe('When there are items in the cart', () => {
     expect(screen.getAllByTestId('cart-item').length).toBe(1);
   });
 
-  it('Renders all the items in the cart (two different items)', async () => {
+  it('Renders all the items in the cart (add item 1 and 2, add item 1 again after items are refetched)', async () => {
     const user = userEvent.setup();
     const router = createMemoryRouter(routes, { ...entry, initialIndex: 0 });
 
@@ -80,6 +80,11 @@ describe('When there are items in the cart', () => {
     await user.type(input, '1');
     await user.click(addButton);
 
+    await user.click(cartLink);
+    await user.click(screen.getByRole('link', { name: 'Shopping items' }));
+    await user.click(screen.getAllByRole('button', { name: 'Buy' })[0]);
+    await user.type(screen.getByLabelText('Choose the quantity:'), '1');
+    await user.click(screen.getByRole('button', { name: 'Add to cart' }));
     await user.click(cartLink);
 
     expect(screen.getAllByTestId('cart-item').length).toBe(2);
