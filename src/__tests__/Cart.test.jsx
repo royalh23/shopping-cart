@@ -5,43 +5,126 @@ import { RouterProvider } from 'react-router';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-vi.mock('../routes/ShoppingItems.jsx', () => {
+vi.mock('../components/CartItem.jsx', () => {
   return {
-    default: () => <div data-testid="shopping-items">Shopping items page</div>,
+    default: () => <div data-testid="cart-item"></div>,
   };
 });
 
-const entry = { initialEntries: ['/cart'] };
-
-it("Renders 'Your shopping cart is empty.' as a paragraph when there are no items in the cart", () => {
-  const router = createMemoryRouter(routes, entry);
-
-  render(<RouterProvider router={router} />);
-
-  expect(screen.getByText('Your shopping cart is empty.')).toBeInTheDocument();
+vi.mock('../components/Checkout.jsx', () => {
+  return {
+    default: () => <div data-testid="checkout"></div>,
+  };
 });
 
-it("Renders a 'Start shopping' link", () => {
-  const router = createMemoryRouter(routes, entry);
-
-  render(<RouterProvider router={router} />);
-
-  expect(
-    screen.getByRole('link', { name: 'Start shopping' }),
-  ).toBeInTheDocument();
+vi.mock('../hooks/use-items.jsx', () => {
+  return {
+    default: () => ({
+      items: Array.from({ length: 15 }, () => ({
+        title: 'mock title',
+        price: 1,
+        imageURL: 'mock url',
+        id: crypto.randomUUID(),
+      })),
+    }),
+  };
 });
 
-it('Renders the shopping items page when the link is clicked', async () => {
-  const user = userEvent.setup();
-  const router = createMemoryRouter(routes, entry);
+const entry = { initialEntries: ['/shopping-items', '/cart'] };
 
-  render(<RouterProvider router={router} />);
+describe('When there are items in the cart', () => {
+  it('Renders all the items in the cart (one item)', async () => {
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, { ...entry, initialIndex: 0 });
 
-  const shoppingItemsLink = screen.getByRole('link', {
-    name: 'Start shopping',
+    render(<RouterProvider router={router} />);
+
+    const buyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
+    const cartLink = screen.getByRole('link', { name: 'Cart' });
+
+    await user.click(buyButton);
+
+    const input = screen.getByLabelText('Choose the quantity:');
+    const addButton = screen.getByRole('button', { name: 'Add to cart' });
+
+    await user.type(input, '1');
+    await user.click(addButton);
+    await user.click(cartLink);
+
+    expect(screen.getAllByTestId('cart-item').length).toBe(1);
   });
 
-  await user.click(shoppingItemsLink);
+  it('Renders all the items in the cart (two different items)', async () => {
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, { ...entry, initialIndex: 0 });
 
-  expect(screen.getByTestId('shopping-items')).toBeInTheDocument();
+    render(<RouterProvider router={router} />);
+
+    const firstBuyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
+    const secondBuyButton = screen.getAllByRole('button', { name: 'Buy' })[1];
+    const cartLink = screen.getByRole('link', { name: 'Cart' });
+
+    await user.click(firstBuyButton);
+
+    let input = screen.getByLabelText('Choose the quantity:');
+    let addButton = screen.getByRole('button', { name: 'Add to cart' });
+
+    await user.type(input, '1');
+    await user.click(addButton);
+
+    await user.click(secondBuyButton);
+
+    input = screen.getByLabelText('Choose the quantity:');
+    addButton = screen.getByRole('button', { name: 'Add to cart' });
+
+    await user.type(input, '1');
+    await user.click(addButton);
+
+    await user.click(cartLink);
+
+    expect(screen.getAllByTestId('cart-item').length).toBe(2);
+  });
+
+  it('Renders the checkout section', async () => {
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, { ...entry, initialIndex: 0 });
+
+    render(<RouterProvider router={router} />);
+
+    const buyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
+    const cartLink = screen.getByRole('link', { name: 'Cart' });
+
+    await user.click(buyButton);
+
+    const input = screen.getByLabelText('Choose the quantity:');
+    const addButton = screen.getByRole('button', { name: 'Add to cart' });
+
+    await user.type(input, '1');
+    await user.click(addButton);
+    await user.click(cartLink);
+
+    expect(screen.getByTestId('checkout')).toBeInTheDocument();
+  });
+});
+
+describe('When there are no items in the cart', async () => {
+  it("Renders 'Your shopping cart is empty.' as a paragraph", () => {
+    const router = createMemoryRouter(routes, entry);
+
+    render(<RouterProvider router={router} />);
+
+    expect(
+      screen.getByText('Your shopping cart is empty.'),
+    ).toBeInTheDocument();
+  });
+
+  it("Renders a 'Start shopping' link", () => {
+    const router = createMemoryRouter(routes, entry);
+
+    render(<RouterProvider router={router} />);
+
+    expect(
+      screen.getByRole('link', { name: 'Start shopping' }),
+    ).toBeInTheDocument();
+  });
 });
