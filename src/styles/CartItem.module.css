@@ -1,0 +1,35 @@
+.container {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+  gap: 40px;
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.image {
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.infoContent {
+  font-size: 1.1rem;
+  color: rgb(88, 88, 88);
+}
+
+.span {
+  font-weight: bold;
+  color: black;
+  margin-left: 5px;
+}

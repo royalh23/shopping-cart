@@ -1,13 +1,14 @@
 .main {
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   gap: 30px;
   padding: 70px 0;
 }
 
 .para {
   font-size: 1.6rem;
+  text-align: center;
 }
 
 .link {
@@ -17,4 +18,22 @@
   text-decoration: none;
   background-color: rgb(14, 128, 210);
   font-size: 1.4rem;
+  min-width: 200px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.heading {
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.subContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }

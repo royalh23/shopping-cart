@@ -4,7 +4,7 @@ import styles from '../styles/Cart.module.css';
 import { Link, useOutletContext } from 'react-router-dom';
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useOutletContext();
+  const [cartItems] = useOutletContext();
 
   return (
     <main className={styles.main}>
@@ -19,9 +19,15 @@ export default function Cart() {
         <>
           <h1 className={styles.heading}>Your cart</h1>
           <div className={styles.container}>
-            <div>
+            <div className={styles.subContainer}>
               {cartItems.map((item) => (
-                <CartItem key={item.id} />
+                <CartItem
+                  key={item.id}
+                  title={item.title}
+                  imageURL={item.imageURL}
+                  price={item.price}
+                  amount={item.amount}
+                />
               ))}
             </div>
             <Checkout />
