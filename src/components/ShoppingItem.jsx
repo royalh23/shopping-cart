@@ -6,7 +6,6 @@ import Button from './Button';
 
 export default function ShoppingItem({ title, price, imageURL, id }) {
   const [isBuyClicked, setIsBuyClicked] = useState(false);
-  const [inputValue, setInputValue] = useState('');
 
   const handleClick = () => setIsBuyClicked(!isBuyClicked);
 
@@ -20,8 +19,6 @@ export default function ShoppingItem({ title, price, imageURL, id }) {
           title={title}
           imageURL={imageURL}
           id={id}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
           handleCancel={handleClick}
         />
       ) : (

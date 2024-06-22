@@ -2,26 +2,32 @@ import styles from '../styles/ItemInput.module.css';
 import Button from './Button';
 import PropTypes from 'prop-types';
 import { useOutletContext } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function ItemInput({
   title,
   price,
   imageURL,
   id,
-  inputValue,
-  setInputValue,
   handleCancel,
 }) {
   const [cartItems, setCartItems] = useOutletContext();
+  const [inputValue, setInputValue] = useState(
+    cartItems.length === 0 || !cartItems.some((item) => item.title === title)
+      ? ''
+      : cartItems.find((item) => item.title === title).amount,
+  );
 
   const handleInputChange = (e) => setInputValue(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newItem = { title, price, imageURL, id, amount: +inputValue };
-    if (cartItems.some((item) => item.id === newItem.id))
+    if (cartItems.some((item) => item.title === newItem.title))
       setCartItems(
-        cartItems.map((item) => (item.id === newItem.id ? newItem : item)),
+        cartItems.map((item) =>
+          item.title === newItem.title ? newItem : item,
+        ),
       );
     else setCartItems([...cartItems, newItem]);
     handleCancel();
@@ -61,7 +67,5 @@ ItemInput.propTypes = {
   price: PropTypes.number.isRequired,
   imageURL: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  inputValue: PropTypes.string.isRequired,
-  setInputValue: PropTypes.func.isRequired,
   handleCancel: PropTypes.func.isRequired,
 };
