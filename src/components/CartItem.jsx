@@ -15,13 +15,13 @@ export default function CartItem({ title, imageURL, price, amount }) {
       <img src={imageURL} alt={title} className={styles.image} />
       <div className={styles.info}>
         <h2 className={styles.title}>{title}</h2>
-        <div className={styles.infoContent}>
+        <div className={styles.infoContent} data-testid="unit-price">
           Unit price: <span className={styles.span}>${price}</span>
         </div>
-        <div className={styles.infoContent}>
+        <div className={styles.infoContent} data-testid="quantity">
           Quantity: <span className={styles.span}>{amount}</span>
         </div>
-        <div className={styles.infoContent}>
+        <div className={styles.infoContent} data-testid="end-price">
           End price: <span className={styles.span}>${price * amount}</span>
         </div>
         <Button onClick={handleRemove}>Remove from cart</Button>

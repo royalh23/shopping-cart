@@ -93,17 +93,10 @@ describe('When there are items in the cart', () => {
 
     render(<RouterProvider router={router} />);
 
-    const buyButton = screen.getAllByRole('button', { name: 'Buy' })[0];
-    const cartLink = screen.getByRole('link', { name: 'Cart' });
-
-    await user.click(buyButton);
-
-    const input = screen.getByLabelText('Choose the quantity:');
-    const addButton = screen.getByRole('button', { name: 'Add to cart' });
-
-    await user.type(input, '1');
-    await user.click(addButton);
-    await user.click(cartLink);
+    await user.click(screen.getAllByRole('button', { name: 'Buy' })[0]);
+    await user.type(screen.getByLabelText('Choose the quantity:'), '1');
+    await user.click(screen.getByRole('button', { name: 'Add to cart' }));
+    await user.click(screen.getByRole('link', { name: 'Cart' }));
 
     expect(screen.getByTestId('checkout')).toBeInTheDocument();
   });
