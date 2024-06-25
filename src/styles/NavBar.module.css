@@ -24,8 +24,7 @@
 }
 
 .link.active {
-  border-bottom: 2px black solid;
-  padding-bottom: 3px;
+  color: rgb(0, 110, 255);
 }
 
 .spanContainer {
