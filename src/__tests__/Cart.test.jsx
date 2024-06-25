@@ -119,4 +119,6 @@ describe('When there are no items in the cart', async () => {
       screen.getByRole('link', { name: 'Start shopping' }),
     ).toBeInTheDocument();
   });
+
+  it.skip('The link renders the shopping items page when clicked');
 });
