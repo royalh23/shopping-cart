@@ -12,7 +12,9 @@ export default function CartItem({ title, imageURL, price, amount }) {
 
   return (
     <div className={styles.container}>
-      <img src={imageURL} alt={title} className={styles.image} />
+      <div className={styles.imageContainer}>
+        <img src={imageURL} alt={title} className={styles.image} />
+      </div>
       <div className={styles.info}>
         <h2 className={styles.title}>{title}</h2>
         <div className={styles.infoContent} data-testid="unit-price">

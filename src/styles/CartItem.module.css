@@ -8,6 +8,10 @@
   padding: 30px;
 }
 
+.imageContainer {
+  justify-self: center;
+}
+
 .image {
   width: 100%;
 }
@@ -32,4 +36,14 @@
   font-weight: bold;
   color: black;
   margin-left: 5px;
+}
+
+@media (max-width: 650px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .imageContainer {
+    width: 150px;
+  }
 }
