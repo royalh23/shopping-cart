@@ -6,7 +6,7 @@ import { render, screen } from '@testing-library/react';
 
 vi.mock('../components/ShoppingItem.jsx', () => {
   return {
-    default: () => <div data-testid="shopping-item">fetched item</div>,
+    default: () => <div data-testid="shopping-item"></div>,
   };
 });
 

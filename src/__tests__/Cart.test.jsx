@@ -30,12 +30,12 @@ vi.mock('../hooks/use-items.jsx', () => {
   };
 });
 
-const entry = { initialEntries: ['/shopping-items', '/cart'] };
+const entries = { initialEntries: ['/shopping-items', '/cart'] };
 
 describe('When there are items in the cart', () => {
   it("Renders 'Your cart' as a heading", async () => {
     const user = userEvent.setup();
-    const router = createMemoryRouter(routes, { ...entry, initialIndex: 0 });
+    const router = createMemoryRouter(routes, { ...entries, initialIndex: 0 });
 
     render(<RouterProvider router={router} />);
 
@@ -49,9 +49,9 @@ describe('When there are items in the cart', () => {
     ).toBeInTheDocument();
   });
 
-  it('Renders all the items in the cart (one item)', async () => {
+  it('Renders all items in the cart (one item)', async () => {
     const user = userEvent.setup();
-    const router = createMemoryRouter(routes, { ...entry, initialIndex: 0 });
+    const router = createMemoryRouter(routes, { ...entries, initialIndex: 0 });
 
     render(<RouterProvider router={router} />);
 
@@ -63,23 +63,20 @@ describe('When there are items in the cart', () => {
     expect(screen.getAllByTestId('cart-item').length).toBe(1);
   });
 
-  it.skip('Renders all the items in the cart (add item 1 and 2, add item 1 again after items are refetched)', async () => {
+  it.skip('Renders all items in the cart (two items)', async () => {
     const user = userEvent.setup();
-    const router = createMemoryRouter(routes, { ...entry, initialIndex: 0 });
+    const router = createMemoryRouter(routes, { ...entries, initialIndex: 0 });
 
     render(<RouterProvider router={router} />);
 
     const cartLink = screen.getByRole('link', { name: 'Cart' });
 
+    console.log(screen.getAllByRole('button'));
+
     await user.click(screen.getAllByRole('button', { name: 'Buy' })[0]);
     await user.type(screen.getByLabelText('Choose the quantity:'), '1');
     await user.click(screen.getByRole('button', { name: 'Add to cart' }));
     await user.click(screen.getAllByRole('button', { name: 'Buy' })[1]);
-    await user.type(screen.getByLabelText('Choose the quantity:'), '1');
-    await user.click(screen.getByRole('button', { name: 'Add to cart' }));
-    await user.click(cartLink);
-    await user.click(screen.getByRole('link', { name: 'Shopping items' }));
-    await user.click(screen.getAllByRole('button', { name: 'Buy' })[0]);
     await user.type(screen.getByLabelText('Choose the quantity:'), '1');
     await user.click(screen.getByRole('button', { name: 'Add to cart' }));
     await user.click(cartLink);
@@ -89,7 +86,7 @@ describe('When there are items in the cart', () => {
 
   it('Renders the checkout section', async () => {
     const user = userEvent.setup();
-    const router = createMemoryRouter(routes, { ...entry, initialIndex: 0 });
+    const router = createMemoryRouter(routes, { ...entries, initialIndex: 0 });
 
     render(<RouterProvider router={router} />);
 
@@ -104,7 +101,7 @@ describe('When there are items in the cart', () => {
 
 describe('When there are no items in the cart', async () => {
   it("Renders 'Your shopping cart is empty.' as a paragraph", () => {
-    const router = createMemoryRouter(routes, entry);
+    const router = createMemoryRouter(routes, entries);
 
     render(<RouterProvider router={router} />);
 
@@ -114,7 +111,7 @@ describe('When there are no items in the cart', async () => {
   });
 
   it("Renders a 'Start shopping' link", () => {
-    const router = createMemoryRouter(routes, entry);
+    const router = createMemoryRouter(routes, entries);
 
     render(<RouterProvider router={router} />);
 
